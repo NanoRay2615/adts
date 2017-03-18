@@ -64,7 +64,7 @@ void List::remove(int k)
 	if (k < 1 or k > num_elements)//if the location is invalid 
 	     throw out_of_range("List::remove(" +to_string(k)+") failed. (valid indices are 1 to "+to_string(num_elements)+")");//throw an "out_of_range" exception
 	
-	Node* delPtr;
+	Node* delPtr = frontPtr;
 	
 	if(k == 1)
 	{
@@ -75,21 +75,43 @@ void List::remove(int k)
 	 {
 	    Node* tmpPtr = frontPtr;
 		
-	    int loc = 1;
-            
-            while(loc != k-1)//get pointer to (k-1)th node
-	    {
+	    for (int i=1; i<k-1; ++i)
 	       tmpPtr = tmpPtr->link;
-		loc++;
-	    }
 	
 	    delPtr = tmpPtr->link;
 	    tmpPtr->link = delPtr->link;
-	  }
+	 }
 	
 	delete delPtr;
 	num_elements--;
 	}
 	
+int List::get(int k)
+{
+	if (k < 1 or k > num_elements)//if location is invalid 
+	     throw out_of_range("List::get(...)");
+	     
+	Node* iPtr = frontPtr;
+	for (int i = 1; i<k; ++i)
+		iPtr = iPtr->link;
+		
+	return iPtr->data;
+}
+	
+void List::display()
+{
+	for (Node* curPtr=frontPtr; curPtr!=nullptr; curPtr=curPtr->link)
+		cout << curPtr->data << " ";
+}
+
+void List::clear()
+{//clears list and removes every element
+    while (num_elements != 0)
+        {
+            remove(1);
+            num_elements--;
+        }
+}
+
 	//Implementations of missing operations
 	

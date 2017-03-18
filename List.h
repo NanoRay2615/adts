@@ -14,11 +14,14 @@ class List //begin List definition
     int num_elements = 0;
     
   public:
+    
      ~List();//destructor
      void insert(int element, int k);//insert element at location k
      void remove(int k);//remove element at location k
+     int get(int k);
      int size();//return the number of elements in the List
-     
+     void display(); // displays the list
+     void clear(); //makes the list empty
      
      /** MISSING OPERATIONS */
      //... fill in ....
